@@ -1,13 +1,38 @@
-
-
-
 export default function Home() {
   return (
-    <div >
-      <main >
-    <h1>Test page</h1>
-      </main>
-     
-    </div>
+    <main>
+      <div
+        style={{
+          width: '100%',
+          height: 600,
+          backgroundColor: '#121212',
+          marginBottom: 24,
+        }}
+      >
+        <h1>Test page</h1>
+      </div>
+
+      <div
+        style={{
+          width: '100%',
+          height: 600,
+          backgroundColor: 'blue',
+          marginBottom: 24,
+        }}
+      >
+        <h1>Test page</h1>
+      </div>
+
+      <div
+        style={{
+          width: '100%',
+          height: 600,
+          backgroundColor: 'green',
+          marginBottom: 24,
+        }}
+      >
+        <h1>Test page</h1>
+      </div>
+    </main>
   );
 }
