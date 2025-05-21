@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 export async function getDataHome() {
   try {
     const res = await fetch(
@@ -28,5 +30,33 @@ export async function getSubMenu() {
     return res.json();
   } catch (err) {
     throw new Error('Error fetching data');
+  }
+}
+
+export async function getItemBySlug(itemSlug: string) {
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/objects`;
+
+  const queryParams = new URLSearchParams({
+    query: JSON.stringify({
+      slug: itemSlug,
+    }),
+    props: 'slug,title,metadata',
+    read_key: process.env.READ_KEY as string,
+  });
+
+  const url = `${baseUrl}?${queryParams.toString()}`;
+
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 120 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error fetching item: ${res.statusText}`);
+    }
+
+    return res.json();
+  } catch (err) {
+    redirect('/');
   }
 }
